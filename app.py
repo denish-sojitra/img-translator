@@ -6,6 +6,10 @@ import os
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return "✅ Your Flask app is working on Render!"
+
 # Translation model
 translator = pipeline("translation", model="Helsinki-NLP/opus-mt-en-hi")
 
@@ -33,6 +37,8 @@ def translate_and_overlay():
     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
     image.save(temp_file.name)
     return send_file(temp_file.name, mimetype="image/jpeg")
+
+
 
 if __name__ == "__main__":
     import os
