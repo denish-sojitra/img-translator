@@ -11,10 +11,12 @@ def home():
     return "✅ Your Flask app is working on Render!"
 
 # Translation model
-translator = pipeline("translation", model="Helsinki-NLP/opus-mt-en-hi")
+# translator = pipeline("translation", model="Helsinki-NLP/opus-mt-en-hi")
 
 @app.route("/overlay", methods=["POST"])
 def translate_and_overlay():
+    from transformers import pipeline
+    translator = pipeline("translation", model="Helsinki-NLP/opus-mt-en-hi")
     if "image" not in request.files or "text" not in request.form:
         return jsonify({"error": "Please provide an image and text to translate"}), 400
 
